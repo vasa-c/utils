@@ -10,6 +10,11 @@ namespace Backuper\Databases;
 
 class Tables extends Base
 {
+    /**
+     * @override
+     */
+    public function run()
+    {
 
-
+    }
 }

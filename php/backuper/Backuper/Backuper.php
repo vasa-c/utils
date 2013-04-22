@@ -36,6 +36,7 @@ class Backuper
     {
         $dir = $this->config->get('dir');
         foreach ($this->config->getDatabases() as $name => $params) {
+            Databases\Base::getInstanceByParams($dir, $name, $params)->run();
         }
     }
 

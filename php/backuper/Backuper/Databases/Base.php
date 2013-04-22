@@ -16,7 +16,7 @@ abstract class Base
      * @param string $dir
      * @param string $name
      * @param array $params
-     * @return \Backuper\Databases\classname
+     * @return \Backuper\Databases\Base
      */
     public static function getInstanceByParams($dir, $name, array $params)
     {
@@ -37,21 +37,42 @@ abstract class Base
      */
     public function __construct($dir, $name, array $params)
     {
+        $this->dir = $dir;
+        $this->name = $name;
+        $this->params = $params;
+    }
 
+    /**
+     * Забэкапить базу
+     */
+    abstract public function run();
+
+    /**
+     * Получить параметры для подключения к базе
+     *
+     * @return array
+     */
+    protected function getDBParams()
+    {
+        $params = array();
+        foreach (array('host', 'username', 'password', 'dbname', 'port') as $field) {
+            $params[$field] = isset($this->params[$field]) ? $this->params[$field] : null;
+        }
+        return $params;
     }
 
     /**
      * @var string
      */
-    private $dir;
+    protected $dir;
 
     /**
      * @var string
      */
-    private $name;
+    protected $name;
 
     /**
      * @var array
      */
-    private $params;
+    protected $params;
 }
