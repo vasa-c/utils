@@ -68,6 +68,16 @@ return array(
          */
         'extended_insert' => true,
 
+        /* Выводить ли комментарии в дампе
+         */
+        'dump_comments' => false,
+
+        /* Выводить время бэкапа после "Dump completed on"
+         * Работает только с $dump_comments=TRUE
+         * Минус: если база/таблица не изменилась, дамп всё равно изменится.
+         */
+        'dump_date' => false,
+
         /* Список таблиц, которые следует игнорировать. */
         'ignore_tables' => array(),
 

@@ -75,6 +75,20 @@ class Dumper
     }
 
     /**
+     * Настройки камментов в дампе
+     *
+     * @param bool $comments
+     *        добавлять камменты
+     * @param bool $date
+     *        добавлять время дампа
+     */
+    public function setComments($comments, $date)
+    {
+        $this->comments = $comments;
+        $this->date = $date;
+    }
+
+    /**
      * Выполнить команду
      */
     public function run()
@@ -85,6 +99,8 @@ class Dumper
         $this->addOption('user', $this->dbparams['username']);
         $this->addOption('password', $this->dbparams['password']);
         $this->addOption('extended-insert', $this->extended);
+        $this->addOption('comments', $this->comments);
+        $this->addOption('dump_date', $this->date);
         if ($this->nodata) {
             $this->addOption('no-data', '');
         }
@@ -154,4 +170,14 @@ class Dumper
      * @var array
      */
     private $options;
+
+    /**
+     * @var bool
+     */
+    private $comments = false;
+
+    /**
+     * @var bool
+     */
+    private $date = false;
 }
