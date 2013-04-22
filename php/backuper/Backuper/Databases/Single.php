@@ -20,6 +20,9 @@ class Single extends Base
     {
         $params = $this->getDBParams();
         $filename = $this->getFilename(true);
+        if (!$this->checkFile($filename)) {
+            return;
+        }
         $append = $this->dumpOnlyStruct($params, $filename);
         $this->dumpOther($params, $filename, $append);
     }

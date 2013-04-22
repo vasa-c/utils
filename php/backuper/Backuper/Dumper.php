@@ -71,7 +71,7 @@ class Dumper
      */
     public function setNoData($nodata)
     {
-        $this->nodata = true;
+        $this->nodata = $nodata;
     }
 
     /**

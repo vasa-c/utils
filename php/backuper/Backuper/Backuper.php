@@ -45,7 +45,8 @@ class Backuper
      */
     private function save()
     {
-
+        $storage = new Storage($this->config);
+        $storage->save();
     }
 
     /**

@@ -16,10 +16,10 @@ class Helpers
      * @param string $cmd
      * @return int
      */
-    public static function exec($cmd)
+    public static function exec($cmd, &$output = null)
     {
         echo $cmd.\PHP_EOL;
-        \system($cmd, $ret);
+        exec($cmd, $output, $ret);
         return $ret;
     }
 
@@ -48,6 +48,15 @@ class Helpers
      */
     public static function createPath($dir, $filename)
     {
+        $dirs = \explode(\DIRECTORY_SEPARATOR, $filename);
+        \array_pop($dirs);
+        $path = $dir;
+        foreach ($dirs as $d) {
+            $path .= \DIRECTORY_SEPARATOR.$d;
+            if (!\is_dir($path)) {
+                \mkdir($path);
+            }
+        }
         return $dir.\DIRECTORY_SEPARATOR.$filename;
     }
 }

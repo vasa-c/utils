@@ -62,6 +62,25 @@ abstract class Base
     }
 
     /**
+     * Проверить, следует ли записывать в файл или он ещё не устарел
+     *
+     * @param string $filename
+     * @return bool
+     */
+    protected function checkFile($filename)
+    {
+        $period = $this->params['period'];
+        if (!$period) {
+            return true;
+        }
+        if (!\file_exists($filename)) {
+            return true;
+        }
+        $mt = \time() - \filemtime($filename);
+        return ($mt >= $period);
+    }
+
+    /**
      * @var string
      */
     protected $dir;
