@@ -50,6 +50,9 @@ class Single extends Base
     {
         $dumper = new Dumper($params, $filename);
         $dumper->setAppendFile($append);
+        if (!empty($this->params['tables'])) {
+            $dumper->setTables($this->params['tables']);
+        }
         $ignore = \array_merge($this->params['ignore_tables'], $this->params['ignore_data']);
         $dumper->setIgnoreTables($ignore);
         $dumper->run();

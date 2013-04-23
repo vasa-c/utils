@@ -51,6 +51,11 @@ class Tables extends Base
             return false;
         }
         $nodata = \in_array($table, $this->params['ignore_data']);
+        if ((!$nodata) && (!empty($this->params['tables']))) {
+            if (!\in_array($table, $this->params['tables'])) {
+                return false;
+            }
+        }
         $vars = array(
             'db' => $this->params['dbname'],
             'table' => $table,
