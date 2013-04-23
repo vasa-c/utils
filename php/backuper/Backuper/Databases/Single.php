@@ -55,6 +55,7 @@ class Single extends Base
         }
         $ignore = \array_merge($this->params['ignore_tables'], $this->params['ignore_data']);
         $dumper->setIgnoreTables($ignore);
+        $dumper->setExtended($this->params['extended_insert']);
         $dumper->run();
     }
 
