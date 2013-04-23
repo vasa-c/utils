@@ -25,8 +25,10 @@ class Storage
      */
     public function save()
     {
+        $dir = $this->config->get('dir');
+        $this->initGit($dir);
         $cmd = array(
-            'cd '.$this->config->get('dir'),
+            'cd '.$dir,
             'unset GIT_DIR',
             'git add .',
             'git commit --message="'.\addslashes($this->createMessage()).'"',
@@ -47,13 +49,30 @@ class Storage
     {
         $message = $this->config->get('commit_message');
         $pattern = '/\{\{\s*(\S+)\s*\}\}/';
-        $message = \preg_replace_callback($pattern, array($this, 'replaceM'), $message);
+        $replace = function ($m) {
+            return \date($m[1]);
+        };
+        $message = \preg_replace_callback($pattern, $replace, $message);
         return $message;
     }
 
-    private function replaceM($m)
+    /**
+     * Проверить, есть ли репа в нужном каталоге и создать если нет
+     *
+     * @param string $dir
+     */
+    private function initGit($dir)
     {
-        return \date($m[1]);
+        if (\is_dir($dir.'/.git')) {
+            return;
+        }
+        $cmd = array(
+            'cd '.$dir,
+            'unset GIT_DIR',
+            'git init',
+        );
+        $cmd = \implode(' && ', $cmd);
+        Helpers::exec($cmd);
     }
 
     /**
