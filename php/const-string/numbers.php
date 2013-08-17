@@ -6,8 +6,6 @@ $count = 10000;
 echo 'PHP: '.\PHP_VERSION.\PHP_EOL;
 echo 'Count: '.$count.\PHP_EOL;
 
-$tags = array('one', 'two', 'three', 'four', 'five');
-
 $mem = \memory_get_usage();
 
 $mt = \microtime(true);
