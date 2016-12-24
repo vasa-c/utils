@@ -27,7 +27,7 @@ for ($i = 0; $i < 10; $i++) {
                 $sum += $item[1];
                 break;
             case 1:
-                $sum += $item[1] * 2;
+                $sum += \md5(\md5(($item['1'] * 2)));
                 break;
             case 2:
                 $sum += $item[1] * 3;

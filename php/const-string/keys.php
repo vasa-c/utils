@@ -32,7 +32,7 @@ for ($i = 0; $i < 10; $i++) {
                 $sum += $item['value'];
                 break;
             case 'two':
-                $sum += $item['value'] * 2;
+                $sum += \md5(\md5(($item['value'] * 2)));
                 break;
             case 'three':
                 $sum += $item['value'] * 3;
