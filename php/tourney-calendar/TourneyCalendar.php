@@ -93,6 +93,22 @@ class TourneyCalendar
     }
     
     /**
+     * @param array $calendar
+     * @return array
+     */
+    public static function reverse(array $calendar)
+    {
+        foreach ($calendar as &$tour) {
+            foreach ($tour as &$pair) {
+                $pair = array_reverse($pair);
+            }
+            unset($pair);
+        }
+        unset($tour);
+        return $calendar;
+    }
+    
+    /**
      * @param array $part
      * @param int $half
      * @return array

@@ -73,6 +73,15 @@ class TourneyCalendarTest extends \PHPUnit_Framework_TestCase
         }
     }
     
+    public function testReverse()
+    {
+        $calendar = TourneyCalendar::create(6);
+        $pair1 = $calendar[3][2];
+        $calendar = TourneyCalendar::reverse($calendar);
+        $pair2 = $calendar[3][2];
+        $this->assertSame(array_reverse($pair1), $pair2);
+    }
+    
     /**
      * @return array
      */
